@@ -86,7 +86,6 @@
     </dependencies>
 
     <build>
-        <outputDirectory>target/classes</outputDirectory>
         <sourceDirectory>${basedir}/src</sourceDirectory>
         <pluginManagement>
             <plugins>
@@ -97,7 +96,6 @@
                     <configuration>
                         <source>1.7</source>
                         <target>1.7</target>
-                        <includes><include>**/hello/**</include></includes>
                     </configuration>
                 </plugin>
                 <plugin>
