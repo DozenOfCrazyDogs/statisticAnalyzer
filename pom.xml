@@ -86,6 +86,7 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>${basedir}/src/hello</sourceDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
