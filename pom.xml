@@ -87,7 +87,7 @@
 
     <build>
         <outputDirectory>target/classes</outputDirectory>
-        <sourceDirectory>${basedir}/src/hello/</sourceDirectory>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
