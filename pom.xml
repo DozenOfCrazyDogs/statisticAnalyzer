@@ -97,7 +97,7 @@
                               <goals><goal>add-source</goal></goals>
                               <configuration>
                                     <sources>
-                                       <source>src/hello</source>
+                                       <source>${basedir}/src/hello</source>
                                     </sources>
                               </configuration>
                            </execution>
