@@ -104,7 +104,7 @@
                     <configuration>
                         <webResources>
                            <resource>
-                              <directory>${project.build.directory}/src/hello</directory>
+                              <directory>${basedir}/src/hello</directory>
                               <targetPath>WEB-INF/classes</targetPath>
                            </resource>
                         </webResources>
