@@ -89,6 +89,21 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                  <groupId>org.codehaus.mojo</groupId>
+                  <artifactId>build-helper-maven-plugin</artifactId>
+                  <executions>
+                           <execution>
+                              <phase>generate-sources</phase>
+                              <goals><goal>add-source</goal></goals>
+                              <configuration>
+                                    <sources>
+                                       <source>src/hello</source>
+                                    </sources>
+                              </configuration>
+                           </execution>
+                  </executions>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.2</version>
@@ -102,12 +117,6 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>2.4</version>
                     <configuration>
-                        <webResources>
-                           <resource>
-                              <directory>${basedir}/src/hello</directory>
-                              <targetPath>WEB-INF/classes</targetPath>
-                           </resource>
-                        </webResources>
                         <webXml>${basedir}/web/WEB-INF/web.xml</webXml>
                         <warSourceDirectory>${basedir}/web</warSourceDirectory>
                         <warName>Spring4MVCHelloWorldRestServiceDemo</warName>
