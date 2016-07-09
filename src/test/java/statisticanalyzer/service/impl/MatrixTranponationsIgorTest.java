@@ -12,7 +12,17 @@ public class MatrixTranponationsIgorTest {
 
     @Test
     public void myMeth() {
-        System.out.println("something");
+        int[] matrix = new int[]
+                {11, 12, 13, 14
+                };
+
+        MatrixTranponationsIgor obj = new MatrixTranponationsIgor();
+
+        int[] result = obj.transponate(matrix);
+
+        int[] expected = {14,12,13,11};
+
+        assertArrayEquals(expected, result);
     }
 
 }
