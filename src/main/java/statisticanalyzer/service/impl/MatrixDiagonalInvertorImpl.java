@@ -18,7 +18,7 @@ public class MatrixDiagonalInvertorImpl implements MatrixDiagonalInvertor {
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input.length; j++) {
                 result[j][i] = input[i][j];
-                log.info("[" + i + "][" + j + "]");
+
             }
         }
         return result;

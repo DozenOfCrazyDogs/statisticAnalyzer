@@ -3,4 +3,6 @@
 .project
 .settings
 .idea
-.idea/*
+.idea
+.idea/workspace.xml
+statisticAnalyzer.iml

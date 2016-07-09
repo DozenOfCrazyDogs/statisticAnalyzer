@@ -1,18 +1,14 @@
 package statisticanalyzer.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.*;
 
 /**
- * Created by Igor on 09.07.2016.
+ * Created by Neifn on 09/07/2016.
  */
-@Slf4j
-public class MatrixDiagonalInvertorImplTest {
-
-    private MatrixDiagonalInvertorImpl matrixDiagonalInvertor = new MatrixDiagonalInvertorImpl();
-
+public class DispersionImplSanyaTest {
+    private DispersionImplSanya  dispersion1 = new DispersionImplSanya();
     @Test
     public void invert() throws Exception {
         //given
@@ -25,10 +21,9 @@ public class MatrixDiagonalInvertorImplTest {
         };
         //when
         printMatrix(matrix);
-        int[][] result = matrixDiagonalInvertor.invert(matrix);
+        int[] result = dispersion1.disp(matrix);
         //then
-        int[] expected = new int[]{11, 21, 31, 41};
-        assertArrayEquals(expected, result[0]);
+
     }
 
     private void printMatrix(int[][] matrix) {
@@ -40,5 +35,4 @@ public class MatrixDiagonalInvertorImplTest {
             System.out.println();
         }
     }
-
 }
