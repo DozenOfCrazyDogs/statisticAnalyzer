@@ -15,12 +15,21 @@ public class DispersionImplSanya implements Dispersion {
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                int sum = 0;
-                sum = sum + matrix[i][j]*matrix[j][i];
-                double disp = Math.sqrt(sum * ((matrix[i][j]-matrix[j][i])*(matrix[i][i]-matrix[j][i])));
+                double avr = 0;
+                avr = avr + matrix[0][j];
+                double average = avr/matrix.length;
+                System.out.println(average + " rabotaet1");
+                double avrG = 0;
+                avrG = avrG + matrix[i][j];
+                double averageG = avrG/matrix.length;
+                System.out.println(averageG + " rabotaet2");
 
 
-                System.out.print(disp + " ");
+                double sqr = (matrix[i][j] - averageG)*(matrix[i][j] - averageG);
+                double sum = 0;
+                sum = sum + sqr;
+                double disp = Math.sqrt(sum/matrix.length);
+                System.out.println(disp + "normas");
             }
         }
             return new int[0];
