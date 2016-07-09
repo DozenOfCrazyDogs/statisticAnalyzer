@@ -1,4 +1,4 @@
-package hello;
+package statisticanalyzer.domain;
 
 /**
  * Created by Igor on 24.06.2016.

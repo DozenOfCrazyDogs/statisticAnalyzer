@@ -1,5 +1,6 @@
-package hello;
+package java.hello.controller;
 
+import java.hello.Message;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +17,14 @@ public class HelloController {
         return "Welcome to RestTemplate Example.";
     }
 
-    @RequestMapping("/hello/{player}")
+    @RequestMapping("/main/hello/{player}")
     public Message message(@PathVariable() String player) {//REST Endpoint.
 
         Message msg = new Message(player, "Hello " + player);
         return msg;
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/main/hello")
     public Message wow(@PathVariable String player) {//REST Endpoint.
 
         Message msg = new Message(player, "Hello " + player);
