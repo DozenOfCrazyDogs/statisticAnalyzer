@@ -1,9 +1,9 @@
-package java.hello.controller;
+package statisticanalyzer.controller;
 
-import java.hello.Message;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import statisticanalyzer.domain.Message;
 
 /**
  * Created by Igor on 24.06.2016.
