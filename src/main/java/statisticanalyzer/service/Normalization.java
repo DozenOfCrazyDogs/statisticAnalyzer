@@ -5,5 +5,5 @@ package statisticanalyzer.service;
  */
 public interface Normalization {
 
-    int[][] norm(int[][] matrix);
+    double[][] norm(double[][] matrix);
 }

@@ -29,7 +29,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/Spring4MVCHelloWorldRestServiceDemo/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="C:\Users\НОЗДОРМУ\IdeaProjects\statisticAnalyzer\target/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="statisticAnalyzer/web/Web" />
     </root>
