@@ -5,5 +5,5 @@ package statisticanalyzer.service;
  */
 public interface Dispersion {
 
-    int[] disp(int[][] matrix);
+    double[] disp(int[][] matrix);
 }
