@@ -15,8 +15,9 @@ public class DispersionImplSanya implements Dispersion {
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                double avr = 0;
-                avr = avr + matrix[0][j];
+
+                int avr = matrix[i][j];
+                avr = matrix[0][j] + matrix[0][j];
                 double average = avr/matrix.length;
                 System.out.println(average + " rabotaet1");
                 double avrG = 0;
