@@ -57,8 +57,8 @@
       <file leaf-file-name="DispersionImplSanya.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/statisticanalyzer/service/impl/DispersionImplSanya.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+            <state relative-caret-position="357">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1075,7 +1075,7 @@
       <workItem from="1468083512899" duration="3284000" />
       <workItem from="1468086824604" duration="6770000" />
       <workItem from="1468095314293" duration="5559000" />
-      <workItem from="1468149142520" duration="771000" />
+      <workItem from="1468149142520" duration="1040000" />
     </task>
     <task id="LOCAL-00001" summary="update project structure&#10;add gitignore">
       <created>1468069179566</created>
@@ -1105,7 +1105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1468097434433</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixup">
+      <created>1468149974289</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1468149974289</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1141,7 +1148,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41712000" />
+    <option name="totallyTimeSpent" value="41981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1522,8 +1529,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/statisticanalyzer/service/impl/DispersionImplSanya.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+        <state relative-caret-position="357">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
