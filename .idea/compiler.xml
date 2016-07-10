@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="statisticAnalyzer" />
+        <module name="statusticAnalyzer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="statisticAnalyzer" target="1.7" />
+      <module name="statusticAnalyzer" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

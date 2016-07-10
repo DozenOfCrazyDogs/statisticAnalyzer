@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/statisticAnalyzer.iml" filepath="$PROJECT_DIR$/statisticAnalyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/statusticAnalyzer.iml" filepath="$PROJECT_DIR$/statusticAnalyzer.iml" />
     </modules>
   </component>
 </project>
