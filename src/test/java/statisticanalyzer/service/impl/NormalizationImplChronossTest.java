@@ -21,7 +21,6 @@ public class NormalizationImplChronossTest {
                 {121, 12, 139},
                 {11, 112, 153},
                 {131, 12, 133},
-
         };
         //when
         double[][] result = normilizer.norm(matrix);
@@ -45,7 +44,6 @@ public class NormalizationImplChronossTest {
                 {11, 12, 139},
                 {11, 112, 153},
                 {11, 12, 133},
-
         };
         //when
         double[][] result = normilizer.norm(matrix);
@@ -68,7 +66,6 @@ public class NormalizationImplChronossTest {
                 {-11, -12, -139},
                 {-14, -112, -153},
                 {-15, -12, -133},
-
         };
         //when
         double[][] result = normilizer.norm(matrix);
@@ -114,6 +111,20 @@ public class NormalizationImplChronossTest {
                 {1.3910},
                 {-0.4748},
                 {-0.9163}
+        };
+        assertMatrixEquals(expected, result);
+    }
+  @Test
+    public void shouldWorkForMatrixOnexOne() throws Exception {
+        //given
+        double[][] matrix = new double[][]{
+                {-11}
+        };
+        //when
+        double[][] result = normilizer.norm(matrix);
+        //then
+        double[][] expected = new double[][]{
+                {0}
         };
         assertMatrixEquals(expected, result);
     }
