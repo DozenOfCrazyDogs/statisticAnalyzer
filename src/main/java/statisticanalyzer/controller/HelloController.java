@@ -18,17 +18,22 @@ public class HelloController {
     }
 
     @RequestMapping("/main/hello/{player}")
-    public Message message(@PathVariable() String player) {//REST Endpoint.
+    public Message message(@PathVariable String player) {//REST Endpoint.
 
         Message msg = new Message(player, "Hello " + player);
         return msg;
     }
 
     @RequestMapping("/main/hello")
-    public Message wow(@PathVariable String player) {//REST Endpoint.
+    public Message wow(@PathVariable String player) {
 
         Message msg = new Message(player, "Hello " + player);
         return msg;
+    }
+
+    @RequestMapping("/main/matrix")
+    public double[][] returnMatrix() {//REST Endpoint.
+        return new double[][]{{0, 1, 3}, {2, 3, 5}};
     }
 
 }
