@@ -25,7 +25,7 @@ public class DispersionImplSanya implements Dispersion {
                 double sqr = (matrix[i][j] - averageG)*(matrix[i][j] - averageG);
                 sum = sum + sqr;
             }
-            z[i] = Math.sqrt(sum/matrix[0].length);
+            z[i] = (sum/matrix[0].length);
             System.out.println(z[i] + "normas");
         }
             return z;
