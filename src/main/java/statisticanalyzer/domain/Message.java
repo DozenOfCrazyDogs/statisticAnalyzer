@@ -9,8 +9,10 @@ import lombok.Setter;
 public class Message {
     @Getter
     @Setter
-    String name;
-    String text;
+    private String name;
+    @Getter
+    @Setter
+    private String text;
 
     public Message(String name, String text) {
         this.name = name;

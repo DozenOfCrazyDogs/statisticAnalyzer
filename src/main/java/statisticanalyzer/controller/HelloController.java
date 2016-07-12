@@ -26,7 +26,6 @@ public class HelloController {
 
     @RequestMapping("/main/hello")
     public Message wow(@PathVariable String player) {
-
         Message msg = new Message(player, "Hello " + player);
         return msg;
     }
