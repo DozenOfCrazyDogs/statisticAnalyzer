@@ -6,7 +6,7 @@ import org.junit.Test;
  * Created by Neifn on 12/07/2016.
  */
 public class NormalizationSanyaTest {
-    private NormalizationImplSanya normaliazation = new NormalizationImplSanya();
+    private NormalizationAverageStrategy normaliazation = new NormalizationAverageStrategy();
 
     @Test
     public void invert() throws Exception {
