@@ -3,6 +3,7 @@
 .project
 .settings
 /out/
+node_modules
 
 # User-specific stuff:
 .idea/workspace.xml
