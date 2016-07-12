@@ -1,4 +1,4 @@
-package statisticanalyzer.service.impl;
+package statisticanalyzer.service.impl.deprecated;
 
 import statisticanalyzer.service.Normalization;
 
