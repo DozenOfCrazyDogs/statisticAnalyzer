@@ -9,9 +9,9 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Igor on 11.07.2016.
  */
-public class NormalizationImplChronossTest {
+public class NormalizationDispersionStrategyTest {
 
-    private Normalization normilizer = new NormalizationImplPaxan();
+    private Normalization normilizer = new NormalizationDispersionStrategy();
 
     @Test
     public void shouldWorkForDefaultNumbers() throws Exception {

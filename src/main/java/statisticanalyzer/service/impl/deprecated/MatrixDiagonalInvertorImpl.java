@@ -1,15 +1,9 @@
-package statisticanalyzer.service.impl;
-
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import statisticanalyzer.service.MatrixDiagonalInvertor;
+package statisticanalyzer.service.impl.deprecated;
 
 /**
  * Created by Igor on 09.07.2016.
  */
-@Service
-@Slf4j
-public class MatrixDiagonalInvertorImpl implements MatrixDiagonalInvertor {
+public class MatrixDiagonalInvertorImpl {
 
     public int[][] invert(int[][] input) {
 
@@ -18,7 +12,6 @@ public class MatrixDiagonalInvertorImpl implements MatrixDiagonalInvertor {
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input.length; j++) {
                 result[j][i] = input[i][j];
-
             }
         }
         return result;

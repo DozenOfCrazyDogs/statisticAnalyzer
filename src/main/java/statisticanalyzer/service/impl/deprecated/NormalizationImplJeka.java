@@ -1,4 +1,4 @@
-package statisticanalyzer.service.impl;
+package statisticanalyzer.service.impl.deprecated;
 
 import statisticanalyzer.service.Normalization;
 
@@ -11,6 +11,7 @@ public class NormalizationImplJeka implements Normalization {
 
 
         System.out.println("Посчитаем каждый элемент матриц U и L");
+        //comment
         double[][] a = new double[matrix.length][matrix.length];
         double[][] b = new double[matrix.length][matrix.length];
         for (int j=0; j< matrix.length; j++){

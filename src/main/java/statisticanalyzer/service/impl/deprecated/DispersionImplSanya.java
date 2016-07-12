@@ -1,12 +1,10 @@
-package statisticanalyzer.service.impl;
-
-import statisticanalyzer.service.Dispersion;
+package statisticanalyzer.service.impl.deprecated;
 
 /**
  * Created by Neifn on 09/07/2016.
  */
-public class DispersionImplSanya implements Dispersion {
-    @Override
+public class DispersionImplSanya {
+
     public double[] disp(int[][] matrix) {
 
     double []z =  new double[matrix.length];

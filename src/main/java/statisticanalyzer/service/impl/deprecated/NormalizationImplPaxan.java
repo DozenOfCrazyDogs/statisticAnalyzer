@@ -1,4 +1,4 @@
-package statisticanalyzer.service.impl;
+package statisticanalyzer.service.impl.deprecated;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,6 @@ import statisticanalyzer.service.Normalization;
  * Created by Kiosani on 09.07.2016.
  */
 
-@Service
 @Slf4j
 public class NormalizationImplPaxan implements Normalization {
 
@@ -21,7 +20,7 @@ public class NormalizationImplPaxan implements Normalization {
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input[0].length; j++) {
                 if (dev[j] == 0) {
-                    result[i][j] = input[i][j]/ avg[j];
+                    result[i][j] = 0;
                     log.info("[" + i + "][" + j + "]");
                 }
                 else {
