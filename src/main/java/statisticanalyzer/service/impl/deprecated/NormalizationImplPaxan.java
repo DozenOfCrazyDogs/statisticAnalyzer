@@ -8,7 +8,6 @@ import statisticanalyzer.service.Normalization;
  * Created by Kiosani on 09.07.2016.
  */
 
-@Service
 @Slf4j
 public class NormalizationImplPaxan implements Normalization {
 
