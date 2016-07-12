@@ -10,20 +10,27 @@ import statisticanalyzer.service.Normalization;
 
 @Service
 @Slf4j
-public class NormalizationImpl implements Normalization {
+public class NormalizationImplPaxan implements Normalization {
 
     public double[][] norm(double input[][]) {
 
         double[][] result = new double[input.length][input[0].length];
-
-        //int dt = determinant(input); //temp
+        double[] avg = average(input);
+        double[] dev = deviation(input, avg);
 
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input[0].length; j++) {
-                result[i][j] = (input[i][j] - sred(input, j))/otklonenie(input, j);
-                log.info("[" + i + "][" + j + "]");
+                if (dev[j] == 0) {
+                    result[i][j] = input[i][j]/ avg[j];
+                    log.info("[" + i + "][" + j + "]");
+                }
+                else {
+                    result[i][j] = (input[i][j] - avg[j])/dev[j];
+                    log.info("[" + i + "][" + j + "]");
+                }
             }
         }
+
         return result;
     }
 
@@ -117,43 +124,33 @@ public class NormalizationImpl implements Normalization {
 
     }
 
-    private double otklonenie(double mtrx[][], int columnIndex) {
+    private double[] deviation(double mtrx[][], double avg_calc[]) {
 
-        double[] q = new  double[mtrx[0].length];
-        //double[] qm = new double[mtrx.length];
+        double[] dev_calc = new  double[mtrx[0].length];
 
         for (int j = 0; j < mtrx[0].length; j++) {
-            //srednee znahenie
-            /*qm[j] = 0;
+            double dev_temp_for_column = 0;
             for (int i = 0; i < mtrx.length; i++) {
-                qm[j] = qm[j] + mtrx[i][j];
+                dev_temp_for_column = dev_temp_for_column + Math.pow((mtrx[i][j] - avg_calc[j]), 2);
             }
-            qm[j] = qm[j] / mtrx.length;*/
-
-            //otklonenie
-            double hislitel = 0;
-            for (int i = 0; i < mtrx.length; i++) {
-                hislitel = hislitel + (mtrx[i][j] - sred(mtrx, j)) * (mtrx[i][j] - sred(mtrx, j));
-            }
-            q[j] = Math.sqrt(hislitel / mtrx.length);
+            dev_calc[j] = Math.sqrt(dev_temp_for_column / mtrx.length);
+            log.info(" Deviation [" + j + "][" + dev_calc[j] + "]");
         }
 
-        return q[columnIndex];
+        return dev_calc;
     }
 
-    private double sred(double mtrx[][], int columnIndex) {
-        //double[] q = new  double[mtrx.length];
-        double[] qm = new double[mtrx[0].length];
+    private double[] average(double mtrx[][]) {
+        double[] avg_calc = new double[mtrx[0].length];
 
         for (int j = 0; j < mtrx[0].length; j++) {
-            //srednee znahenie
-            qm[j] = 0;
+            avg_calc[j] = 0;
             for (int i = 0; i < mtrx.length; i++) {
-                qm[j] = qm[j] + mtrx[i][j];
+                avg_calc[j] = avg_calc[j] + mtrx[i][j];
             }
-            qm[j] = qm[j] / mtrx.length;
-            //log.info(" Sred [" + j + "][" + qm[j] + "]");
+            avg_calc[j] = avg_calc[j] / mtrx.length;
+            log.info(" Average [" + j + "][" + avg_calc[j] + "]");
         }
-        return qm[columnIndex];
+        return avg_calc;
     }
 }

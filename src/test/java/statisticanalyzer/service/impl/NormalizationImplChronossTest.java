@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class NormalizationImplChronossTest {
 
-    private Normalization normilizer = new NormalizationImpl();
+    private Normalization normilizer = new NormalizationImplPaxan();
 
     @Test
     public void shouldWorkForDefaultNumbers() throws Exception {
