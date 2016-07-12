@@ -12,7 +12,7 @@ import statisticanalyzer.domain.Message;
 @RestController
 public class HelloController {
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/main/")
     public String welcome() {
         return "Welcome to RestTemplate Example.";
     }
