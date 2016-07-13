@@ -34,94 +34,48 @@ public class NormalizationImplPaxan implements Normalization {
         return result;
     }
 
-    private int determinant(int mtrx[][]) {
+    public double[][] norm4(double input[][]) {
 
-        int det = 1;
+        double[][] result = new double[input.length][input[0].length];
+        double[] max_in_column = maxInColumn(input);
 
-        if  (mtrx[0][0] == 0) {
-            for (int i = 1; i < mtrx.length; i++) {
-                if (mtrx[i][0] != 0) {
-                    int[] mas1 = new int[mtrx.length];
-                    for (int j = 0; j < mtrx.length; j++) {
-                        mas1[j] = mtrx[0][j];
-                        mtrx[0][j] = mtrx[i][j];
-                        mtrx[i][j] = mas1[j];
-                    }
-                    break;
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input[0].length; j++) {
+                if (max_in_column[j] == 0) {
+                    result[i][j] = 0;
+                    log.info("[" + i + "][" + j + "]");
                 }
                 else {
-                    //break & metka do returna
+                    result[i][j] = input[i][j] / max_in_column[j];
+                    log.info("[" + i + "][" + j + "]");
                 }
             }
         }
 
-        //LU
-        /*int[][] u = new int[mtrx.length][mtrx.length];
-        int[][] l = new int[mtrx.length][mtrx.length];*/
+        return result;
+    }
 
-        /*for (int i = 0; i < mtrx.length; i++) {
-            u[0][i] = mtrx[0][i];
-        }
-        for (int i = 1; i < mtrx.length; i++) {
-            l[i][0] = mtrx[i][0] / u[0][0];
-        }
-        for (int i = 1; i < mtrx.length; i++) {
-            for (int j = i; j < mtrx.length; j++) {
-                int u_temp = mtrx[i][j];
-                for (int k = 0; k < i - 1; k++) {
-                    u_temp = u_temp + l[i][k]*u[k][j];
-                }
-                u[i][j] = u_temp;
-            }
-            for (int j = i + 1; j < mtrx.length; j++) {
-                int sum_l_temp = 0;
-                for (int k = 0; k < i - 1; k++) {
-                    sum_l_temp = sum_l_temp + l[j][k]*u[k][i];
-                }
-                l[j][i] = (mtrx[j][i]-sum_l_temp) / u[i][i];
-            }
-        }*/
+    public double[][] norm5(double input[][]) {
 
-        /*for (int j = 0; j < mtrx.length; j++) {
-            for (int i = 0; i < mtrx.length; i++) {
-                if (i <= j) {
-                    u[i][j] = mtrx[i][j];
-                    for (int k = 0; k < i - 1; k++) {
-                        u[i][j] = l[i][k]*u[k][j];
-                    }
-                    if (i == j) {
-                        l[i][j] = 1;
-                    }
-                    else {
-                        l[i][j] = 0;
-                    }
+        double[][] result = new double[input.length][input[0].length];
+        double[] avg = average(input);
+        double[] max_in_column = maxInColumn(input);
+        double[] min_in_column = minInColumn(input);
+
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input[0].length; j++) {
+                if (max_in_column[j] == min_in_column[j]) {
+                    result[i][j] = 0;
+                    log.info("[" + i + "][" + j + "]");
                 }
                 else {
-                    l[i][j] = mtrx[i][j];
-                    for (int k = 0; k < j - 1; k++) {
-                        l[i][j] = l[i][k]*u[k][j];
-                    }
-                    l[i][j] = l[i][j] / u[i][j];
-                    u[i][j] = 0;
+                    result[i][j] = (input[i][j] - avg[j]) / (max_in_column[j] - min_in_column[j]);
+                    log.info("[" + i + "][" + j + "]");
                 }
             }
         }
 
-
-
-        int det_L = l[0][0];
-        int det_U = u[0][0];
-        for (int i = 1; i < mtrx.length; i++) {
-            det_L = det_L * l[i][i];
-            det_U = det_U * u[i][i];
-        }
-
-        det = det_L * det_U;*/
-
-
-
-        return det;
-
+        return result;
     }
 
     private double[] deviation(double mtrx[][], double avg_calc[]) {
@@ -152,5 +106,33 @@ public class NormalizationImplPaxan implements Normalization {
             log.info(" Average [" + j + "][" + avg_calc[j] + "]");
         }
         return avg_calc;
+    }
+
+    private double[] maxInColumn(double mtrx[][]) {
+        double[] max_calc = new double[mtrx[0].length];
+
+        for (int j = 0; j < mtrx[0].length; j++) {
+            max_calc[j] = mtrx[0][j];
+            for (int i = 0; i < mtrx.length; i++) {
+                if (mtrx[i][j] > max_calc[j]) {
+                    max_calc[j] = mtrx[i][j];
+                }
+            }
+        }
+        return max_calc;
+    }
+
+    private double[] minInColumn(double mtrx[][]) {
+        double[] min_calc = new double[mtrx[0].length];
+
+        for (int j = 0; j < mtrx[0].length; j++) {
+            min_calc[j] = mtrx[0][j];
+            for (int i = 0; i < mtrx.length; i++) {
+                if (mtrx[i][j] < min_calc[j]) {
+                    min_calc[j] = mtrx[i][j];
+                }
+            }
+        }
+        return min_calc;
     }
 }
