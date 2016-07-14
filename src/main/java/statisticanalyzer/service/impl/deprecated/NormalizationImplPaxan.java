@@ -3,6 +3,7 @@ package statisticanalyzer.service.impl.deprecated;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import statisticanalyzer.service.Normalization;
+import statisticanalyzer.service.impl.utils.MathUtils;
 
 /**
  * Created by Kiosani on 09.07.2016.
@@ -14,7 +15,27 @@ public class NormalizationImplPaxan implements Normalization {
     public double[][] norm(double input[][]) {
 
         double[][] result = new double[input.length][input[0].length];
-        double[] avg = average(input);
+        double[] array;
+        double avg;
+        double dev;
+        for (int j = 0; j < input[0].length; j++) {
+            array = MathUtils.getColumnForMatrix(input, j);
+            avg = MathUtils.getAverage(array);
+            dev = MathUtils.getStandardDeviation(array, avg);
+
+            for (int i = 0; i < input.length; i++) {
+                if (dev == 0) {
+                    result[i][j] = 0;
+                    log.info("[" + i + "][" + j + "]");
+                }
+                else {
+                    result[i][j] = (input[i][j] - avg)/dev;
+                    log.info("[" + i + "][" + j + "]");
+                }
+            }
+        }
+
+        /*double[] avg = average(input);
         double[] dev = deviation(input, avg);
 
         for (int i = 0; i < input.length; i++) {
@@ -28,14 +49,33 @@ public class NormalizationImplPaxan implements Normalization {
                     log.info("[" + i + "][" + j + "]");
                 }
             }
-        }
+        }*/
 
         return result;
     }
 
-    public double[][] norm4(double input[][]) {
+    /*public double[][] norm4(double input[][]) {
 
-        double[][] result = new double[input.length][input[0].length];
+        //double[][] result = new double[input.length][input[0].length];
+        double[] array;
+        double max;
+
+        for (int j = 0; j < input[0].length; j++) {
+            array = MathUtils.getColumnForMatrix(input, j);
+            max = MathUtils.getMax(array);
+
+            for (int i = 0; i < input.length; i++) {
+                if (max == 0) {
+                    input[i][j] = 0;
+                }
+                else {
+                    input[i][j] = input[i][j] / max;
+                }
+            }
+        }
+
+        return input;
+
         double[] max_in_column = maxInColumn(input);
 
         for (int i = 0; i < input.length; i++) {
@@ -52,9 +92,9 @@ public class NormalizationImplPaxan implements Normalization {
         }
 
         return result;
-    }
+    }*/
 
-    public double[][] norm5(double input[][]) {
+   /* public double[][] norm5(double input[][]) {
 
         double[][] result = new double[input.length][input[0].length];
         double[] avg = average(input);
@@ -75,7 +115,7 @@ public class NormalizationImplPaxan implements Normalization {
         }
 
         return result;
-    }
+    }*/
 
     private double[] deviation(double mtrx[][], double avg_calc[]) {
 
