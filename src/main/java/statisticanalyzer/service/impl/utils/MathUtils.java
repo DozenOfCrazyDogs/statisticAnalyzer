@@ -42,5 +42,31 @@ public class MathUtils {
         return Math.sqrt(dispersion);
     }
 
+    public static double[] getColumnForMatrix(double[][] matrix, int columnIndex) {
+        double[] array = new double[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            array[i] = matrix[i][columnIndex];
+        }
+        return array;
+    }
 
+    public static double getMax(double array[]) {
+        double max = array[0];
+        for (double element : array) {
+            if (element > max) {
+                max = element;
+            }
+        }
+        return max;
+    }
+
+    public static double getMin(double array[]) {
+        double min = array[0];
+        for (double element : array) {
+            if (element < min) {
+                min = element;
+            }
+        }
+        return min;
+    }
 }
