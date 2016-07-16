@@ -1,4 +1,4 @@
-package statisticanalyzer.service.impl;
+package statisticanalyzer.service.impl.deprecated;
 
 /**
  * Created by Igor on 16.07.2016.
