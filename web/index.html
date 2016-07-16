@@ -1,33 +1,52 @@
-<!DOCTYPE html>
-<html ng-app>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Hello World, AngularJS - ViralPatel.net</title>
+    <meta charset="UTF-8">
+    <title>Example - example-select-ngrepeat-production</title>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.min.css">
+
+    <link rel="stylesheet" href="css/layout.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="app/app.js"></script>
+
+
 
 </head>
-<body>
-
-<div class="row">
-
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <h1>Hello {{ sometext }}</h1>
-
-        Write some text in textbox:
-
-        <div class="input-group">
-            <input ng-model="sometext"  type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-            <span class="input-group-addon" id="basic-addon2">example</span>
-        </div>
+<body ng-app="ngrepeatSelect">
+<div ng-controller="ExampleController" class="container">
+    <h1>Normalize Matrix</h1>
+    <div class="ex">
+    <form name="myForm" class="form1">
+        <select name="selectRow" id="selectRow" ng-model="rows" ng-init="rows=data.availableOptions[1].id">
+            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
+    </form>
+    <form class="form1">
+        <select name="selectColumn" id="selectColumn" ng-model="columns" ng-init="columns=data.availableOptions[1].id">
+            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
+    </form>
     </div>
-    <div class="col-md-4"></div>
+    <div>
+        <form ng-submit="submitMyForm()">
+            <table class="table">
+                <tbody>
+                <tr ng-repeat="dim in dimensions | filter: rows">
+                    <td ng-repeat="dim in dimensions | filter: columns"><input type="text"></td>
+                </tr>
+                </tbody>
+            </table>
+        <input type="submit" class="button1" value="Resolve">
+        </form>
+        <table class="table">
+            <tbody>
+            <tr ng-repeat="row in fromJSON">
+                <td ng-repeat="col in row">{{col}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/libs/angular/angular.min.js"></script>
-<script src="app/app.js"></script>
-
 </body>
 </html>
