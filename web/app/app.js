@@ -115,7 +115,7 @@
             var sendJSON = function(matrixJSON){
                 $http({
                     method: 'POST',
-                    url: 'http://77.90.246.249:8082/Deploy/normalize',
+                    url: '/normalize',
                     data: matrixJSON
                 }).then(function successCallback(response) {
                     $scope.showBlocks = false;
