@@ -83,7 +83,7 @@
         <table>
             <tbody>
             <tr ng-repeat="row in fromJSON">
-                <td ng-repeat="col in row track by $index">{{col}}</td>
+                <td ng-repeat="col in row track by $index" ng-style="myStyle">{{col}}</td>
             </tr>
             </tbody>
         </table>
