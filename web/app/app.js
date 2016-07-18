@@ -3,70 +3,167 @@
  */
 (function(angular) {
     'use strict';
-    angular.module('ngrepeatSelect', [])
+    angular.module('ngIndexApp', ['ngAnimate'])
         .controller('ExampleController', ['$scope', '$http', function($scope, $http) {
+            
+            // DEFAULTS INIT AND GLOBAL VARIABLES
             $scope.data = {
-                rows: null,
-                columns: null,
                 availableOptions: [
                     {id: '2', name: '2'},
                     {id: '3', name: '3'},
-                    {id: '4', name: '4'}
-                ],
+                    {id: '4', name: '4'},
+                    {id: '5', name: '5'}
+                ]
             };
+            $scope.a={};
+            for(var i = 0; i<5; i++){
+                for(var j = 0; j<5;j++){
+                    $scope.a[""+i+j]="";
+                }
+            }
+            $scope.showRow = [true, false, false];
+            $scope.showCol = [true, false, false];
+            $scope.rows = "3";
+            $scope.columns = "3";
+            $scope.showBlocks = true;
+            $scope.myStyleColumns = [];
             
-            $scope.dimensions=[
-                {text: [1, 2, 3, 4]},
-                {text: [2, 3, 4]},
-                {text: [3, 4]},
-                {text: [4]}
-            ];
-            
-            $scope.submitMyForm=function(){
-                
-                //wrap matrix date to JSON
-                var total=angular.element( document.querySelector( '.table' ) ).find('tr');
-                var coll = {};
-                for(var i=0; i < total.length; i++) {
-                    var tr = total[i];
-                    var tdColl = $(tr).find('td');
-                    for(var y = 0; y < tdColl.length; y++ ){
-                        var td = tdColl.eq(y);
-                        var input = td.find('input');
-                        if (input.length) {
-                            coll["a"+i+y]=input.val();
+            // SELECT FUNCTION
+            $scope.displayMatrix = function() {
+                switch ($scope.rows) {
+                    case "2":
+                        $scope.showRow[0] = false;
+                        $scope.showRow[1] = false;
+                        $scope.showRow[2] = false;
+                        $scope.myStyleRows = "90px";
+                        break;
+                    case "3":
+                        $scope.showRow[0] = true;
+                        $scope.showRow[1] = false;
+                        $scope.showRow[2] = false;
+                        $scope.myStyleRows = "60px";
+                        break;
+                    case "4":
+                        $scope.showRow[0] = true;
+                        $scope.showRow[1] = true;
+                        $scope.showRow[2] = false;
+                        $scope.myStyleRows = "45px";
+                        break;
+                    case "5":
+                        $scope.showRow[0] = true;
+                        $scope.showRow[1] = true;
+                        $scope.showRow[2] = true;
+                        $scope.myStyleRows = "36px";
+                }
+                switch ($scope.columns){
+                    case "2":
+                        $scope.showCol[0]=false;
+                        $scope.showCol[1]=false;
+                        $scope.showCol[2]=false;
+                        $scope.myStyleColumns[0] = "213px";
+                        $scope.myStyleColumns[1] = "45px";
+                        break;
+                    case "3":
+                        $scope.showCol[0]=true;
+                        $scope.showCol[1]=false;
+                        $scope.showCol[2]=false;
+                        $scope.myStyleColumns[0] = "142px";
+                        $scope.myStyleColumns[1] = "40px";
+                        break;
+                    case "4":
+                        $scope.showCol[0]=true;
+                        $scope.showCol[1]=true;
+                        $scope.showCol[2]=false;
+                        $scope.myStyleColumns[0] = "106px";
+                        $scope.myStyleColumns[1] = "35px";
+                        break;
+                    case "5":
+                        $scope.showCol[0]=true;
+                        $scope.showCol[1]=true;
+                        $scope.showCol[2]=true;
+                        $scope.myStyleColumns[0] = "84px";
+                        $scope.myStyleColumns[1] = "30px";
+                }
+                $scope.myStyle = {
+                    width : $scope.myStyleColumns[0],
+                    'font-size' : $scope.myStyleColumns[1]
+                    //height : $scope.myStyleRows
+                };
+            };
+
+            // ### START OF POST BLOCK
+            // CHECK FOR NUMERICAL VALUES AND BUILD JSON OF NUMBERS
+            var collectInfo = function(){
+                var matrixJSON = {};
+                var trigger = true;
+                for (var i=0; i < $scope.rows; i++){
+                    for (var j=0; j<$scope.columns;j++){
+                        var check = Number($scope.a[""+i+j]);
+                        if (isNaN(check) || $scope.a[""+i+j]==""){
+                            trigger = false;
                         } else {
-                            coll["a"+i+y]=input.val();
+                            matrixJSON["a" + i + j] = $scope.a[""+i+j];
                         }
                     }
                 }
+                if (trigger) {
+                    return matrixJSON;
+                } else {return trigger}
+            };
 
-                /* post to server*/
-                /*$http.post(url, data);*/
-                var res = $http.post("/statisticAnalyzer_json", coll);
-                res.success(function(data, status, headers, config) {
-                    $scope.message = data;
+            // SEND POST REQUEST FUNCTION
+            var sendJSON = function(matrixJSON){
+                var res = $http.post("/statisticAnalyzer_json", matrixJSON);
+                res.success(function(data, status, headers, config){ 
+                    $scope.showBlocks = false;
+                    return data;
                 });
                 res.error(function(data, status, headers, config) {
                     alert( "failure message: " + JSON.stringify({data: data}));
                 });
-
-                //parse incoming JSON message
-                var keys = Object.keys($scope.message).sort();
-                var last = keys[keys.length-1];
+            };
+            
+            // PARSE JSON OBJECT AND PRINT INTO TABLE
+            var parseJSON = function(receivedJSON){
+                var sortByKey = Object.keys(receivedJSON).sort();
+                var lastKey = sortByKey[sortByKey.length - 1];
                 var output = [];
-                for (var i = 0; i < last.length; i += 1) {
-                    output.push(last.charAt(i));
+                for (var i = 0; i < lastKey.length; i += 1) {
+                    output.push(lastKey.charAt(i));
                 }
-                var final = [];
-                for (var i=0; i<parseInt(output[1])+1;i++) {
-                    var pref = [];
-                    for (var j=0; j<parseInt(output[2])+1;j++){
-                        pref.push($scope.message["a"+i+j]);
+                var finalArray = [];
+                for (var i = 0; i < parseInt(output[1]) + 1; i++) {
+                    var rowArray = [];
+                    for (var j = 0; j < parseInt(output[2]) + 1; j++) {
+                        rowArray.push(receivedJSON["a" + i + j]);
                     }
-                    final.push(pref);
+                    finalArray.push(rowArray);
                 }
-                $scope.fromJSON=final;
-            }
+                return finalArray;
+            };
+            
+            // SUBMIT BUTTON FUNCTION
+            $scope.newSubmit = function() {
+                var sendData = collectInfo();
+                if (sendData == false) {
+                    alert("Please enter numerical values!");
+                } else {
+                    //var message = sendJSON(sendData);
+                    $scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
+                    $scope.showBlocks = false; // remove this
+                }
+            };
+            // ### END OF SUBMIT BLOCK
+
+            // BACK BUTTON FUNCTION
+            $scope.backButton = function(){
+                $scope.showBlocks=true;
+                for (var i=0; i < 5; i++){
+                    for (var j=0; j<5;j++){
+                        $scope.a[""+i+j] = "";
+                    }
+                }
+            };
+
         }]);
 })(window.angular);

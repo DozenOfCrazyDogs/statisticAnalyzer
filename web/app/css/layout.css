@@ -975,10 +975,37 @@ h1 {
   width: 500px;
 }
 
+h2 {
+  margin: 0 50px;
+}
+
 form {
   max-width: 500px;
   margin: 0 100px;
   display: inline-block;
+}
+
+.answer {
+  max-width: 500px;
+  margin: 0 100px;
+  display: inline-block;
+}
+
+.answer td {
+  border: 0;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  background: transparent;
+  outline: none;
+  height: 60px;
+  width: 142px;
+  color: black;
+  font-size: 40px;
+  font-family: Tahoma;
+  text-align: center;
+  /* text-shadow: 0 1px 1px #000; */
 }
 
 input[type="text"] {
@@ -1021,6 +1048,10 @@ input[type="text"] {
 .button1:active {
   position:relative;
   top:1px;
+}
+
+.button2 {
+  padding: 6px 160px;
 }
 
 select {
