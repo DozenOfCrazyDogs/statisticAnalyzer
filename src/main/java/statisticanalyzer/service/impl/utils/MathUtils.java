@@ -1,5 +1,8 @@
 package statisticanalyzer.service.impl.utils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by Igor on 12.07.2016.
  */
@@ -69,4 +72,21 @@ public class MathUtils {
         }
         return min;
     }
+
+    public static double[][] roundMatrix(double[][] matrix, int places) {
+        for (double[] row : matrix)
+            for (double cell : row)
+                cell = round(cell, places);
+        return matrix;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import statisticanalyzer.controller.dto.Matrix;
 import statisticanalyzer.domain.Message;
 import statisticanalyzer.service.Normalization;
+import statisticanalyzer.service.impl.utils.MathUtils;
 
 /**
  * Created by Igor on 24.06.2016.
@@ -13,8 +14,10 @@ import statisticanalyzer.service.Normalization;
 @RestController
 public class HelloController {
 
+    private static final int ROUND_PLACES = 3;
+
     @Autowired
-    Normalization normalization;
+    private Normalization normalization;
 
     @RequestMapping(value = "/main/")
     public String welcome() {
@@ -47,7 +50,8 @@ public class HelloController {
 
     @RequestMapping(path = "/normalize", method = RequestMethod.POST)
     public double[][] normalizeMatrix(@RequestBody Matrix matrix) {
-        return normalization.norm(matrix.getMatrix());
+        double[][] normalizedData = normalization.norm(matrix.getMatrix());
+        return MathUtils.roundMatrix(normalizedData, ROUND_PLACES);
     }
 
 }
