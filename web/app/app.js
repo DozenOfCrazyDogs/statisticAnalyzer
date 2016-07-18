@@ -119,6 +119,7 @@
                     data: matrixJSON
                 }).then(function successCallback(response) {
                     $scope.showBlocks = false;
+                    $scope.test = response;
                     return response;
                 }, function errorCallback(response) {
                     alert( "failure message: " + JSON.stringify({data: response}));
