@@ -75,8 +75,8 @@ public class MathUtils {
 
     public static double[][] roundMatrix(double[][] matrix, int places) {
         for (double[] row : matrix)
-            for (double cell : row)
-                cell = round(cell, places);
+            for (int i=0;i <row.length; i++)
+                row[i] = round(row[i], places);
         return matrix;
     }
 
