@@ -113,7 +113,7 @@
 
             // SEND POST REQUEST FUNCTION
             var sendJSON = function(matrixJSON){
-                var res = $http.post("/statisticAnalyzer_json", matrixJSON);
+                var res = $http.post("/normalize", matrixJSON);
                 res.success(function(data, status, headers, config){ 
                     $scope.showBlocks = false;
                     return data;
@@ -152,8 +152,8 @@
                     sendData["matrix"] = parseJSON(objectMatrix);
                     var message = sendJSON(sendData);
                     //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
-                    $scope.test = message;
-                    $scope.showBlocks = false; // remove this
+                    $scope.fromJSON = message;
+                    //$scope.showBlocks = false; // remove this
                 }
             };
             // ### END OF SUBMIT BLOCK
