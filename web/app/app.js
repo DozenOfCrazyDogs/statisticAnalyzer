@@ -113,13 +113,15 @@
 
             // SEND POST REQUEST FUNCTION
             var sendJSON = function(matrixJSON){
-                var res = $http.post("/normalize", matrixJSON);
-                res.success(function(data, status, headers, config){ 
+                $http({
+                    method: 'POST',
+                    url: 'http://77.90.246.249:8082/Deploy/normalize',
+                    data: matrixJSON
+                }).then(function successCallback(response) {
                     $scope.showBlocks = false;
-                    return data;
-                });
-                res.error(function(data, status, headers, config) {
-                    alert( "failure message: " + JSON.stringify({data: data}));
+                    return response;
+                }, function errorCallback(response) {
+                    alert( "failure message: " + JSON.stringify({data: response}));
                 });
             };
             
@@ -150,9 +152,8 @@
                 } else {
                     var sendData = {};
                     sendData["matrix"] = parseJSON(objectMatrix);
-                    var message = sendJSON(sendData);
                     //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
-                    $scope.fromJSON = message;
+                    $scope.fromJSON = sendJSON(sendData);
                     //$scope.showBlocks = false; // remove this
                 }
             };
