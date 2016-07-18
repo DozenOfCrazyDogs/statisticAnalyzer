@@ -113,13 +113,15 @@
 
             // SEND POST REQUEST FUNCTION
             var sendJSON = function(matrixJSON){
-                var res = $http.post("/statisticAnalyzer_json", matrixJSON);
-                res.success(function(data, status, headers, config){ 
+                $http({
+                    method: 'POST',
+                    url: 'http://77.90.246.249:8082/Deploy/normalize',
+                    data: matrixJSON
+                }).then(function successCallback(response) {
                     $scope.showBlocks = false;
-                    return data;
-                });
-                res.error(function(data, status, headers, config) {
-                    alert( "failure message: " + JSON.stringify({data: data}));
+                    $scope.fromJSON = response.data;
+                }, function errorCallback(response) {
+                    alert( "failure message: " + JSON.stringify({data: response}));
                 });
             };
             
@@ -144,13 +146,15 @@
             
             // SUBMIT BUTTON FUNCTION
             $scope.newSubmit = function() {
-                var sendData = collectInfo();
-                if (sendData == false) {
+                var objectMatrix = collectInfo();
+                if (objectMatrix == false) {
                     alert("Please enter numerical values!");
                 } else {
-                    //var message = sendJSON(sendData);
-                    $scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
-                    $scope.showBlocks = false; // remove this
+                    var sendData = {};
+                    sendData["matrix"] = parseJSON(objectMatrix);
+                    //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
+                    sendJSON(sendData);
+                    //$scope.showBlocks = false; // remove this
                 }
             };
             // ### END OF SUBMIT BLOCK
