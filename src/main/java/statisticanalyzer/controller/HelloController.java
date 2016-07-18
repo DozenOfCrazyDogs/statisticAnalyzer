@@ -1,9 +1,7 @@
 package statisticanalyzer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import statisticanalyzer.controller.dto.Matrix;
 import statisticanalyzer.domain.Message;
 import statisticanalyzer.service.Normalization;
@@ -42,9 +40,14 @@ public class HelloController {
     }
 
     @RequestMapping("/main/norm")
-    public Matrix returnNormMatrix(){
+    public Matrix returnNormMatrix() {
         Matrix matrix = new Matrix(normalization.norm(new double[][]{{0, 1, 3}, {2, 3, 5}}));
         return matrix;
+    }
+
+    @RequestMapping(path = "/normalize", method = RequestMethod.POST)
+    public double[][] normalizeMatrix(@RequestBody Matrix matrix) {
+        return normalization.norm(matrix.getMatrix());
     }
 
 }
