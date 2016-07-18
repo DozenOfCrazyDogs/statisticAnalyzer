@@ -14,22 +14,19 @@
 
 </head>
 <body ng-app="ngIndexApp">
-<div ng-controller="ExampleController" class="container">
+<div>
     <h1>Normalize Matrix</h1>
-    <div ng-show="showBlocks" class="animate-fade">
-    <div class="ex">
-        <form name="myForm" class="form1">
-            <select name="selectRow" id="selectRow" ng-model="rows" ng-change="displayMatrix()">
-                <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-            </select>
-        </form>
-        <form class="form1">
-            <select name="selectColumn" id="selectColumn" ng-model="columns" ng-change="displayMatrix()">
-                <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-            </select>
-        </form>
-    </div>
-    <div>
+</div>
+
+<div ng-controller="ExampleController" id="main">
+    <div id="button1"><button>LEFT</button></div>
+    <div class="animate-fade check" ng-show="showBlocks">
+        <select name="selectRow" id="selectRow" ng-model="rows" ng-change="displayMatrix()">
+            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
+        <select name="selectColumn" id="selectColumn" ng-model="columns" ng-change="displayMatrix()">
+            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
         <form ng-submit="newSubmit()">
             <table>
                 <tbody>
@@ -71,11 +68,9 @@
                 </tbody>
             </table>
             <input type="submit" class="button1" value="Resolve">
-            <p></p>
         </form>
     </div>
-    </div>
-    <div ng-hide="showBlocks" class="answer animate-fade">
+    <div ng-hide="showBlocks" class="animate-fade check">
         <h2>The answer is:</h2>
         <table>
             <tbody>
@@ -86,6 +81,7 @@
         </table>
         <button class="button1 button2" ng-click="backButton()">Again!</button>
     </div>
+    <div id="button2"><button>RIGHT</button></div>
 </div>
 </body>
 </html>
