@@ -1,0 +1,29 @@
+/* Action we're hiding */
+.animate-fade.ng-hide-add {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    opacity: 1;
+}
+
+.animate-fade.ng-hide-add-active {
+    opacity: 0;
+}
+
+/* Action we're showing */
+.animate-fade.ng-hide-remove {
+    -webkit-transition: all 1s ease 1s;
+    transition: all 1s ease 1s;
+    opacity: 0;
+}
+
+.animate-fade.ng-hide-remove-active {
+    opacity: 1;
+}
+
+.animate-fade.ng-hide-add, .animate-fade.ng-hide-remove {
+    display: block !important;
+}
+
+.animate-fade {
+    position: absolute;
+}
