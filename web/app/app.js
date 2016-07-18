@@ -144,12 +144,15 @@
             
             // SUBMIT BUTTON FUNCTION
             $scope.newSubmit = function() {
-                var sendData = collectInfo();
-                if (sendData == false) {
+                var objectMatrix = collectInfo();
+                if (objectMatrix == false) {
                     alert("Please enter numerical values!");
                 } else {
-                    //var message = sendJSON(sendData);
-                    $scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
+                    var sendData = {};
+                    sendData["matrix"] = parseJSON(objectMatrix);
+                    var message = sendJSON(sendData);
+                    //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
+                    $scope.test = message;
                     $scope.showBlocks = false; // remove this
                 }
             };
