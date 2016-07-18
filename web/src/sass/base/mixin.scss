@@ -1,0 +1,7 @@
+
+// For Margin Top
+@each $marginTop in $marginTops {
+  .margin_top_#{$marginTop} {
+    margin-top: #{$marginTop}px;
+  }
+}

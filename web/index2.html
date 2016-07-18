@@ -5,12 +5,13 @@
     <title>Example - example-select-ngrepeat-production</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="assets/libs/angular/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
-    <script src="app/app.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
 
-
+    <script src="assets/libs/angular/angular.min.js"></script>
+    <script src="assets/libs/angular/angular-animate.min.js"></script>
+    <script src="app/app.js"></script>
 
 </head>
 <body ng-app="ngIndexApp">
@@ -67,7 +68,7 @@
                 </tr>
                 </tbody>
             </table>
-            <input type="submit" class="button1" value="Resolve">
+            <input type="submit" class="btn btn-primary btn--full margin_top_10" value="Resolve">
         </form>
     </div>
     <div ng-hide="showBlocks" class="animate-fade check">
