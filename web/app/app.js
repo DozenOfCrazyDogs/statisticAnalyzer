@@ -119,7 +119,7 @@
                     data: matrixJSON
                 }).then(function successCallback(response) {
                     $scope.showBlocks = false;
-                    return response;
+                    $scope.fromJSON = response.data;
                 }, function errorCallback(response) {
                     alert( "failure message: " + JSON.stringify({data: response}));
                 });
@@ -153,7 +153,7 @@
                     var sendData = {};
                     sendData["matrix"] = parseJSON(objectMatrix);
                     //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
-                    $scope.fromJSON = sendJSON(sendData);
+                    sendJSON(sendData);
                     //$scope.showBlocks = false; // remove this
                 }
             };
