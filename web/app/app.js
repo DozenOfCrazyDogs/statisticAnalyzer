@@ -26,7 +26,6 @@
             $scope.rows = "3";
             $scope.columns = "3";
             $scope.showBlocks = true;
-            $scope.myStyleColumns = [];
             
             // SELECT FUNCTION
             $scope.displayMatrix = function() {
@@ -60,33 +59,28 @@
                         $scope.showCol[0]=false;
                         $scope.showCol[1]=false;
                         $scope.showCol[2]=false;
-                        $scope.myStyleColumns[0] = "213px";
-                        $scope.myStyleColumns[1] = "45px";
+                        $scope.myStyleColumns = "45px";
                         break;
                     case "3":
                         $scope.showCol[0]=true;
                         $scope.showCol[1]=false;
                         $scope.showCol[2]=false;
-                        $scope.myStyleColumns[0] = "142px";
-                        $scope.myStyleColumns[1] = "40px";
+                        $scope.myStyleColumns = "40px";
                         break;
                     case "4":
                         $scope.showCol[0]=true;
                         $scope.showCol[1]=true;
                         $scope.showCol[2]=false;
-                        $scope.myStyleColumns[0] = "106px";
-                        $scope.myStyleColumns[1] = "35px";
+                        $scope.myStyleColumns = "35px";
                         break;
                     case "5":
                         $scope.showCol[0]=true;
                         $scope.showCol[1]=true;
                         $scope.showCol[2]=true;
-                        $scope.myStyleColumns[0] = "84px";
-                        $scope.myStyleColumns[1] = "30px";
+                        $scope.myStyleColumns = "30px";
                 }
                 $scope.myStyle = {
-                    width : $scope.myStyleColumns[0],
-                    'font-size' : $scope.myStyleColumns[1]
+                    'font-size' : $scope.myStyleColumns
                     //height : $scope.myStyleRows
                 };
             };
