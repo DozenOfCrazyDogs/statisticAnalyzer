@@ -88,7 +88,7 @@ table {
   margin: 10px 0;
   height: 200%;
   transition: all 0.3s ease 0s;
-  width: 99.9%;
+  width: 100%;
 }
 .buttonMain:hover {
   color: white;
@@ -140,5 +140,10 @@ option {
 
   h1 {
     padding-top: 0;
+  }
+
+  .buttonMain {
+    margin: 0 0.3%;
+    width: 99.4%;
   }
 }
