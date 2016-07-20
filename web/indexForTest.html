@@ -13,7 +13,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
     <script src="testFolderCss/app.js"></script>
     <link rel="stylesheet" href="testFolderCss/animationANG.css">
-    <link rel="stylesheet" href="testFolderCss/style.css">
+    <link rel="stylesheet" href="testFolderCss/sliderstyle.css">
 
 
 
@@ -22,7 +22,7 @@
 <div class="header">
     <h1><span id="heading">Normalize Matrix</span></h1>
 </div>
-<div class="col-2"><p>some text</p><button>LEFT</button></div>
+<div class="col-2"><button><a href="#" class="arrow previous"></a></button></div>
 <div class="col-8">
     <div class="animate-fade col-6" ng-show="showBlocks">
         <table>
@@ -96,6 +96,6 @@
         <button class="buttonMain" ng-click="backButton()">Again!</button>
     </div>
 </div>
-<div class="col-2"><button>RIGHT</button></div>
+<div class="col-2"><button><a href="#" class="arrow next"></a></button></div>
 </body>
 </html>
