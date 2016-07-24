@@ -6,22 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="testFolderCss/testcss.css">
+    <!--<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">-->
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
-    <script src="app/app.js"></script>
+    <script src="testFolderCss/app.js"></script>
+    <link rel="stylesheet" href="testFolderCss/animationANG.css">
 
 
 
 </head>
 <body ng-app="ngIndexApp" ng-controller="ExampleController">
-<div class="col-12">
+<div class="header">
     <h1><span id="heading">Normalize Matrix</span></h1>
 </div>
-<div class="col-2"><!--<button>LEFT</button>--></div>
+<div class="col-2"><p>some text</p><button>LEFT</button></div>
 <div class="col-8">
-    <div class="animate-fade container" ng-show="showBlocks">
+    <div class="animate-fade col-6" ng-show="showBlocks">
         <table>
             <tbody>
             <tr>
@@ -44,44 +46,44 @@
                 <tr>
                     <td><input type="text" ng-model="a['00']" ng-style="myStyle"></td>
                     <td><input type="text" ng-model="a['01']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[0]"><input type="text" ng-model="a['02']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[1]"><input type="text" ng-model="a['03']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[2]"><input type="text" ng-model="a['04']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[0]" ng-model="a['02']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[1]" ng-model="a['03']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[2]" ng-model="a['04']" ng-style="myStyle"></td>
                 </tr>
                 <tr>
                     <td><input type="text" ng-model="a['10']" ng-style="myStyle"></td>
                     <td><input type="text" ng-model="a['11']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[0]"><input type="text" ng-model="a['12']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[1]"><input type="text" ng-model="a['13']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[2]"><input type="text" ng-model="a['14']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[0]" ng-model="a['12']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[1]" ng-model="a['13']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[2]" ng-model="a['14']" ng-style="myStyle"></td>
                 </tr>
                 <tr ng-show="showRow[0]">
                     <td><input type="text" ng-model="a['20']" ng-style="myStyle"></td>
                     <td><input type="text" ng-model="a['21']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[0]"><input type="text" ng-model="a['22']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[1]"><input type="text" ng-model="a['23']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[2]"><input type="text" ng-model="a['24']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[0]" ng-model="a['22']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[1]" ng-model="a['23']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[2]" ng-model="a['24']" ng-style="myStyle"></td>
                 </tr>
                 <tr ng-show="showRow[1]">
                     <td><input type="text" ng-model="a['30']" ng-style="myStyle"></td>
                     <td><input type="text" ng-model="a['31']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[0]"><input type="text" ng-model="a['32']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[1]"><input type="text" ng-model="a['33']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[2]"><input type="text" ng-model="a['34']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[0]" ng-model="a['32']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[1]" ng-model="a['33']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[2]" ng-model="a['34']" ng-style="myStyle"></td>
                 </tr>
                 <tr ng-show="showRow[2]">
                     <td><input type="text" ng-model="a['40']" ng-style="myStyle"></td>
                     <td><input type="text" ng-model="a['41']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[0]"><input type="text" ng-model="a['42']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[1]"><input type="text" ng-model="a['43']" ng-style="myStyle"></td>
-                    <td ng-show="showCol[2]"><input type="text" ng-model="a['44']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[0]" ng-model="a['42']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[1]" ng-model="a['43']" ng-style="myStyle"></td>
+                    <td><input type="text" ng-show="showCol[2]" ng-model="a['44']" ng-style="myStyle"></td>
                 </tr>
                 </tbody>
             </table>
             <input type="submit" class="buttonMain" value="Resolve">
         </form>
     </div>
-    <div ng-hide="showBlocks" class="animate-fade container">
+    <div ng-hide="showBlocks" class="animate-fade col-6">
         <p id="answer">The answer is:</p>
         <table class="result">
             <tbody>
@@ -93,6 +95,6 @@
         <button class="buttonMain" ng-click="backButton()">Again!</button>
     </div>
 </div>
-<div class="col-2"><!--<button>RIGHT</button>--></div>
+<div class="col-2"><button>RIGHT</button></div>
 </body>
 </html>

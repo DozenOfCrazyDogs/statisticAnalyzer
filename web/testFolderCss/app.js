@@ -5,7 +5,7 @@
     'use strict';
     angular.module('ngIndexApp', ['ngAnimate'])
         .controller('ExampleController', ['$scope', '$http', function($scope, $http) {
-            
+
             // DEFAULTS INIT AND GLOBAL VARIABLES
             $scope.data = {
                 availableOptions: [
@@ -26,7 +26,8 @@
             $scope.rows = "3";
             $scope.columns = "3";
             $scope.showBlocks = true;
-            
+            $scope.myStyleColumns = [];
+
             // SELECT FUNCTION
             $scope.displayMatrix = function() {
                 switch ($scope.rows) {
@@ -59,28 +60,33 @@
                         $scope.showCol[0]=false;
                         $scope.showCol[1]=false;
                         $scope.showCol[2]=false;
-                        $scope.myStyleColumns = "45px";
+                        $scope.myStyleColumns[0] = "213px";
+                        $scope.myStyleColumns[1] = "45px";
                         break;
                     case "3":
                         $scope.showCol[0]=true;
                         $scope.showCol[1]=false;
                         $scope.showCol[2]=false;
-                        $scope.myStyleColumns = "40px";
+                        $scope.myStyleColumns[0] = "142px";
+                        $scope.myStyleColumns[1] = "40px";
                         break;
                     case "4":
                         $scope.showCol[0]=true;
                         $scope.showCol[1]=true;
                         $scope.showCol[2]=false;
-                        $scope.myStyleColumns = "35px";
+                        $scope.myStyleColumns[0] = "106px";
+                        $scope.myStyleColumns[1] = "35px";
                         break;
                     case "5":
                         $scope.showCol[0]=true;
                         $scope.showCol[1]=true;
                         $scope.showCol[2]=true;
-                        $scope.myStyleColumns = "30px";
+                        $scope.myStyleColumns[0] = "84px";
+                        $scope.myStyleColumns[1] = "30px";
                 }
                 $scope.myStyle = {
-                    'font-size' : $scope.myStyleColumns
+                    //width : $scope.myStyleColumns[0],
+                    'font-size' : $scope.myStyleColumns[1]
                     //height : $scope.myStyleRows
                 };
             };
@@ -107,18 +113,16 @@
 
             // SEND POST REQUEST FUNCTION
             var sendJSON = function(matrixJSON){
-                $http({
-                    method: 'POST',
-                    url: 'http://77.90.246.249:8082/Deploy/normalize',
-                    data: matrixJSON
-                }).then(function successCallback(response) {
+                var res = $http.post("/statisticAnalyzer_json", matrixJSON);
+                res.success(function(data, status, headers, config){
                     $scope.showBlocks = false;
-                    $scope.fromJSON = response.data;
-                }, function errorCallback(response) {
-                    alert( "failure message: " + JSON.stringify({data: response}));
+                    return data;
+                });
+                res.error(function(data, status, headers, config) {
+                    alert( "failure message: " + JSON.stringify({data: data}));
                 });
             };
-            
+
             // PARSE JSON OBJECT AND PRINT INTO TABLE
             var parseJSON = function(receivedJSON){
                 var sortByKey = Object.keys(receivedJSON).sort();
@@ -137,18 +141,16 @@
                 }
                 return finalArray;
             };
-            
+
             // SUBMIT BUTTON FUNCTION
             $scope.newSubmit = function() {
-                var objectMatrix = collectInfo();
-                if (objectMatrix == false) {
+                var sendData = collectInfo();
+                if (sendData == false) {
                     alert("Please enter numerical values!");
                 } else {
-                    var sendData = {};
-                    sendData["matrix"] = parseJSON(objectMatrix);
-                    //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
-                    sendJSON(sendData);
-                    //$scope.showBlocks = false; // remove this
+                    //var message = sendJSON(sendData);
+                    $scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
+                    $scope.showBlocks = false; // remove this
                 }
             };
             // ### END OF SUBMIT BLOCK
