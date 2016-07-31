@@ -1,6 +1,6 @@
 'use strict';
-    angular.module('ngApp', ['ngAnimate'])
-        .controller('MatrixCtrl', ['$scope', '$http', function($scope, $http) {
+        var app =angular.module('ngApp', ['ngAnimate']);
+            app.controller('MatrixCtrl', ['$scope', '$http', function($scope, $http) {
 
             console.log("init App JS");
 
