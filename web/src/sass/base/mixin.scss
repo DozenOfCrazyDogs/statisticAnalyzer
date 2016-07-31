@@ -1,7 +1,25 @@
 
-// For Margin Top
+// For Margin
 @each $marginTop in $marginTops {
   .margin_top_#{$marginTop} {
     margin-top: #{$marginTop}px;
+  }
+}
+
+@each $marginBottom in $marginBottoms {
+  .margin_bottom_#{$marginBottom} {
+    margin-bottom: #{$marginBottom}px;
+  }
+}
+
+@each $marginLeft in $marginLefts {
+  .margin_left_#{$marginLeft} {
+    margin-left: #{$marginLeft}px;
+  }
+}
+
+@each $marginRight in $marginRights {
+  .margin_right_#{$marginRight} {
+    margin-right: #{$marginRight}px;
   }
 }

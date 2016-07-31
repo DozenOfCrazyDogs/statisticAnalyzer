@@ -2,87 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Example - example-select-ngrepeat-production</title>
+    <title>Static Analyzer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <!--CSS Styles-->
+    <link rel='stylesheet' type='text/css' href="assets/css/fonts.css" />
+    <link rel='stylesheet' type='text/css' href="assets/css/bootstrap.min.css" />
+    <link rel='stylesheet' type='text/css' href="assets/css/style.min.css" />
 
+    <!--Include javascript Angular library-->
     <script src="assets/libs/angular/angular.min.js"></script>
     <script src="assets/libs/angular/angular-animate.min.js"></script>
+
+
+    <!--Custom files with javascript logic-->
     <script src="app/app.js"></script>
 
 </head>
-<body ng-app="ngIndexApp">
-<div>
-    <h1>Normalize Matrix</h1>
+<body ng-app="ngApp" ng-controller="MatrixCtrl">
+
+<div class="row margin_top_50">
+    <div class="col-md-3 col-xs-2"></div>
+    <div class="col-md-6 col-xs-8">
+        <h1 class="title js-title">Normalize Matrix</h1>
+        <div class="table margin_top_20" ng-show="showBlock">
+                <div class="thead">
+                    <div class="tr">
+                        <div class="td">
+                            <select class="select" ng-model="rows" ng-options="option.value as option.select for option in options" ng-change="select()"></select>
+                        </div>
+                        <div class="td">
+                            <select class="select" ng-model="columns" ng-options="option.value as option.select for option in options" ng-change="select()"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="tbody margin_top_10">
+                    <div class="tr" ng-repeat="row in rowsMatrix">
+                        <div class="td" ng-repeat="column in columnsMatrix">
+                            <input class="input js-f-input" type="text"/>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div ng-hide="showBlock">
+            <div class="table">
+                <div class="tbody">
+                    <div class="tr" ng-repeat="row in data">
+                        <div class="td" ng-repeat="col in row track by $index">{{col}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn btn-primary btn--form margin_top_10" ng-click="submit()">
+            <span class="btn__text js-t-btn"></span>
+        </div>
+    </div>
+    <div class="col-md-3 col-xs-2"></div>
 </div>
 
-<div ng-controller="ExampleController" id="main">
-    <div id="button1"><button>LEFT</button></div>
-    <div class="animate-fade check" ng-show="showBlocks">
-        <select name="selectRow" id="selectRow" ng-model="rows" ng-change="displayMatrix()">
-            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-        </select>
-        <select name="selectColumn" id="selectColumn" ng-model="columns" ng-change="displayMatrix()">
-            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
-        </select>
-        <form ng-submit="newSubmit()">
-            <table>
-                <tbody>
-                <tr>
-                    <td><input type="text" ng-model="a['00']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-model="a['01']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[0]" ng-model="a['02']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[1]" ng-model="a['03']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[2]" ng-model="a['04']" ng-style="myStyle"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" ng-model="a['10']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-model="a['11']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[0]" ng-model="a['12']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[1]" ng-model="a['13']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[2]" ng-model="a['14']" ng-style="myStyle"></td>
-                </tr>
-                <tr ng-show="showRow[0]">
-                    <td><input type="text" ng-model="a['20']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-model="a['21']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[0]" ng-model="a['22']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[1]" ng-model="a['23']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[2]" ng-model="a['24']" ng-style="myStyle"></td>
-                </tr>
-                <tr ng-show="showRow[1]">
-                    <td><input type="text" ng-model="a['30']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-model="a['31']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[0]" ng-model="a['32']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[1]" ng-model="a['33']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[2]" ng-model="a['34']" ng-style="myStyle"></td>
-                </tr>
-                <tr ng-show="showRow[2]">
-                    <td><input type="text" ng-model="a['40']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-model="a['41']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[0]" ng-model="a['42']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[1]" ng-model="a['43']" ng-style="myStyle"></td>
-                    <td><input type="text" ng-show="showCol[2]" ng-model="a['44']" ng-style="myStyle"></td>
-                </tr>
-                </tbody>
-            </table>
-            <input type="submit" class="btn btn-primary btn--full margin_top_10" value="Resolve">
-        </form>
-    </div>
-    <div ng-hide="showBlocks" class="animate-fade check">
-        <h2>The answer is:</h2>
-        <table>
-            <tbody>
-            <tr ng-repeat="row in fromJSON">
-                <td ng-repeat="col in row track by $index" ng-style="myStyle">{{col}}</td>
-            </tr>
-            </tbody>
-        </table>
-        <button class="button1 button2" ng-click="backButton()">Again!</button>
-    </div>
-    <div id="button2"><button>RIGHT</button></div>
-</div>
 </body>
 </html>

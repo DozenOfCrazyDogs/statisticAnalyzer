@@ -1,127 +1,112 @@
-/**
- * Created by НОЗДОРМУ on 16.07.2016.
- */
-(function(angular) {
-    'use strict';
-    angular.module('ngIndexApp', ['ngAnimate'])
-        .controller('ExampleController', ['$scope', '$http', function($scope, $http) {
-            
+'use strict';
+    angular.module('ngApp', ['ngAnimate'])
+        .controller('MatrixCtrl', ['$scope', '$http', function($scope, $http) {
+
+            console.log("init App JS");
+
             // DEFAULTS INIT AND GLOBAL VARIABLES
-            $scope.data = {
-                availableOptions: [
-                    {id: '2', name: '2'},
-                    {id: '3', name: '3'},
-                    {id: '4', name: '4'},
-                    {id: '5', name: '5'}
-                ]
-            };
-            $scope.a={};
-            for(var i = 0; i<5; i++){
-                for(var j = 0; j<5;j++){
-                    $scope.a[""+i+j]="";
-                }
+            let matrixMaxLength = 5; // Max matrix 5x5
+            let matrixMinLength = 2; // Min matrix 2x2
+
+            $scope.options = [];
+            $scope.matrix = {};
+            $scope.rows = `${matrixMinLength}`;
+            $scope.columns = `${matrixMinLength}`;
+            $scope.showBlock = true;
+            let rows = [];
+            let columns = [];
+
+            for (let k = matrixMinLength; k <= matrixMaxLength; k++) {
+                $scope.options.push({
+                    select: `${k}`,
+                    value: `${k}`
+                });
             }
-            $scope.showRow = [true, false, false];
-            $scope.showCol = [true, false, false];
-            $scope.rows = "3";
-            $scope.columns = "3";
-            $scope.showBlocks = true;
-            
+
+            // Init function
+
+            onInit();
+
+            function onInit() {
+                select($scope.rows, $scope.columns);
+                checkTitle();
+            }
+
             // SELECT FUNCTION
-            $scope.displayMatrix = function() {
-                switch ($scope.rows) {
-                    case "2":
-                        $scope.showRow[0] = false;
-                        $scope.showRow[1] = false;
-                        $scope.showRow[2] = false;
-                        $scope.myStyleRows = "90px";
-                        break;
-                    case "3":
-                        $scope.showRow[0] = true;
-                        $scope.showRow[1] = false;
-                        $scope.showRow[2] = false;
-                        $scope.myStyleRows = "60px";
-                        break;
-                    case "4":
-                        $scope.showRow[0] = true;
-                        $scope.showRow[1] = true;
-                        $scope.showRow[2] = false;
-                        $scope.myStyleRows = "45px";
-                        break;
-                    case "5":
-                        $scope.showRow[0] = true;
-                        $scope.showRow[1] = true;
-                        $scope.showRow[2] = true;
-                        $scope.myStyleRows = "36px";
-                }
-                switch ($scope.columns){
-                    case "2":
-                        $scope.showCol[0]=false;
-                        $scope.showCol[1]=false;
-                        $scope.showCol[2]=false;
-                        $scope.myStyleColumns = "45px";
-                        break;
-                    case "3":
-                        $scope.showCol[0]=true;
-                        $scope.showCol[1]=false;
-                        $scope.showCol[2]=false;
-                        $scope.myStyleColumns = "40px";
-                        break;
-                    case "4":
-                        $scope.showCol[0]=true;
-                        $scope.showCol[1]=true;
-                        $scope.showCol[2]=false;
-                        $scope.myStyleColumns = "35px";
-                        break;
-                    case "5":
-                        $scope.showCol[0]=true;
-                        $scope.showCol[1]=true;
-                        $scope.showCol[2]=true;
-                        $scope.myStyleColumns = "30px";
-                }
-                $scope.myStyle = {
-                    'font-size' : $scope.myStyleColumns
-                    //height : $scope.myStyleRows
-                };
+
+            $scope.select = function() {
+                select($scope.rows, $scope.columns);
             };
 
-            // ### START OF POST BLOCK
-            // CHECK FOR NUMERICAL VALUES AND BUILD JSON OF NUMBERS
-            var collectInfo = function(){
-                var matrixJSON = {};
-                var trigger = true;
-                for (var i=0; i < $scope.rows; i++){
-                    for (var j=0; j<$scope.columns;j++){
-                        var check = Number($scope.a[""+i+j]);
-                        if (isNaN(check) || $scope.a[""+i+j]==""){
-                            trigger = false;
-                        } else {
-                            matrixJSON["a" + i + j] = $scope.a[""+i+j];
-                        }
+            function select(rowsValue, columnsValue, callback) {
+                rows=[];
+                columns=[];
+
+                for (let i = 0; i < parseInt(rowsValue); i++) {
+                    rows[i] = {
+                        index: `${i}`,
+                        value: ""
+                    };
+                    for (let j = 0; j < parseInt(columnsValue); j++) {
+                        columns[j] = {
+                            index: `${j}`,
+                            value: ""
+                        };
                     }
                 }
-                if (trigger) {
-                    return matrixJSON;
-                } else {return trigger}
-            };
+                $scope.rowsMatrix = rows;
+                $scope.columnsMatrix = columns;
+
+                if (callback !== undefined && callback != "") callback();
+            }
 
             // SEND POST REQUEST FUNCTION
-            var sendJSON = function(matrixJSON){
+
+            function sendData(data){
                 $http({
                     method: 'POST',
                     url: 'http://77.90.246.249:8082/Deploy/normalize',
-                    data: matrixJSON
+                    data: data
                 }).then(function successCallback(response) {
-                    $scope.showBlocks = false;
-                    $scope.fromJSON = response.data;
+                    $scope.showBlock = false;
+                    checkTitle();
+                    $scope.data = recieveData(response.data);
                 }, function errorCallback(response) {
-                    alert( "failure message: " + JSON.stringify({data: response}));
+                    console.log( "failure message: " + JSON.stringify({data: response}));
                 });
+            }
+
+            // SUBMIT BUTTON FUNCTION
+
+            $scope.submit = function() {
+                if ($scope.showBlock){
+                    var input = document.getElementsByClassName('js-f-input');
+
+                    var data = {};
+                    var i = 0;
+                    for (var j = 0; j < $scope.rows; j++) {
+                        for (var k = 0; k < $scope.columns; k++) {
+                            data["a"+j+k] = input[i++].value;
+                        }
+                    }
+                    sendData(data);
+                }else{
+                    backButton();
+                }
             };
-            
+
+            // BACK BUTTON FUNCTION
+
+            function backButton(){
+                $scope.showBlock = true;
+                checkTitle();
+                select($scope.rows, $scope.columns)
+            }
+
             // PARSE JSON OBJECT AND PRINT INTO TABLE
-            var parseJSON = function(receivedJSON){
-                var sortByKey = Object.keys(receivedJSON).sort();
+
+            function recieveData(data){
+                var sortByKey = Object.keys(data).sort();
                 var lastKey = sortByKey[sortByKey.length - 1];
                 var output = [];
                 for (var i = 0; i < lastKey.length; i += 1) {
@@ -131,37 +116,28 @@
                 for (var i = 0; i < parseInt(output[1]) + 1; i++) {
                     var rowArray = [];
                     for (var j = 0; j < parseInt(output[2]) + 1; j++) {
-                        rowArray.push(receivedJSON["a" + i + j]);
+                        rowArray.push(data["a" + i + j]);
                     }
                     finalArray.push(rowArray);
                 }
                 return finalArray;
-            };
-            
-            // SUBMIT BUTTON FUNCTION
-            $scope.newSubmit = function() {
-                var objectMatrix = collectInfo();
-                if (objectMatrix == false) {
-                    alert("Please enter numerical values!");
-                } else {
-                    var sendData = {};
-                    sendData["matrix"] = parseJSON(objectMatrix);
-                    //$scope.fromJSON = parseJSON(sendData); // change sendData -> message and uncomment line above
-                    sendJSON(sendData);
-                    //$scope.showBlocks = false; // remove this
-                }
-            };
-            // ### END OF SUBMIT BLOCK
+            }
 
-            // BACK BUTTON FUNCTION
-            $scope.backButton = function(){
-                $scope.showBlocks=true;
-                for (var i=0; i < 5; i++){
-                    for (var j=0; j<5;j++){
-                        $scope.a[""+i+j] = "";
-                    }
-                }
-            };
+            // Function for title and text button
 
+            function checkTitle(){
+               var title = document.getElementsByClassName('js-title');
+               var btn_text = document.getElementsByClassName('js-t-btn');
+               if($scope.showBlock){
+                   title[0].innerHTML = 'Normalize Matrix';
+                   btn_text[0].innerHTML = 'Resolve';
+               }else{
+                   title[0].innerHTML = 'The answer is:';
+                   btn_text[0].innerHTML = 'Again!';
+               }
+            }
         }]);
-})(window.angular);
+
+
+
+
